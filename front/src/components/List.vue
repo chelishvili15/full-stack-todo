@@ -1,38 +1,55 @@
 <template>
-    <ul class="flex flex-col space-y-3">
-        <li 
-            v-for="(value, index) in list" 
-            :key="index"
-            class="text-xl bg-blue-700 px-4 py-3 rounded-xl"
-        >
-            <Checkbox
-                :id="index"
-                :label="value"
-                :checked="checks[index]"
-                @click="clicked(index)" 
-            />
-        </li>
-    </ul>
+  <ul class="flex flex-col space-y-3">
+    <li
+      v-for="(value, index) in list"
+      :key="index"
+      class="text-xl bg-blue-700 px-4 h-16 rounded-xl flex justify-between items-center cursor-pointer"
+      @click="clickRow(index, $event)"
+    >
+      <Checkbox
+        :id="value.id"
+        :label="value.item"
+        :checked="checks[index]" 
+      />
+
+      <div
+        class="bg-red-700 text-gray-100 py-2 px-4 rounded-lg cursor-pointer hover:ring-2 hover:ring-red-700 transition duration-100 ease-in"
+        @click="del(value.id, $event)"
+      >
+        Delete
+      </div>
+    </li>
+  </ul>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import Checkbox from './Checkbox.vue'
+import { ref } from "vue";
+import Checkbox from "./Checkbox.vue";
 
-const checks = ref(Array(props.length).fill(false))
+const emits = defineEmits(["delete"]);
 
-const clicked = (index) => {
-    checks.value[index] = !checks.value[index]
- }
+const checks = ref(Array(props.length).fill(false));
+
+const clickRow = (index) => {
+  checks.value[index] = !checks.value[index];
+};
+
+const del = (id, e) => {
+  e.stopPropagation()
+  e.preventDefault()
+  fetch(`http://localhost:3000/api/delete/${id}`, {
+    method: 'delete'
+  })
+    .then(res => res.json())
+    .then((data) => emits("delete", data))
+}
 
 const props = defineProps({
-    list: {
-        type: Object,
-        default: () => []
-    }
-})
+  list: {
+    type: Object,
+    default: () => [],
+  },
+});
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
