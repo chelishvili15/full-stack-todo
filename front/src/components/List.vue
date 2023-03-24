@@ -14,7 +14,7 @@
 
       <div
         class="bg-red-700 text-gray-100 py-2 px-4 rounded-lg cursor-pointer hover:ring-2 hover:ring-red-700 transition duration-100 ease-in"
-        @click="del(value.id, $event)"
+        @click="del(value.id, index, $event)"
       >
         Delete
       </div>
@@ -34,7 +34,7 @@ const clickRow = (index) => {
   checks.value[index] = !checks.value[index];
 };
 
-const del = (id, e) => {
+const del = (id, index, e) => {
   e.stopPropagation()
   e.preventDefault()
   fetch(`http://localhost:3000/api/delete/${id}`, {
@@ -42,6 +42,7 @@ const del = (id, e) => {
   })
     .then(res => res.json())
     .then((data) => emits("delete", data))
+    .then(checks.value.splice(index, 1))
 }
 
 const props = defineProps({
