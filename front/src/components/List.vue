@@ -1,9 +1,9 @@
 <template>
-  <ul class="flex flex-col space-y-3">
+  <ul v-auto-animate class="flex flex-col space-y-3">
     <li
       v-for="(value, index) in list"
-      :key="index"
-      class="text-xl bg-blue-700 px-4 h-16 rounded-xl flex justify-between items-center cursor-pointer"
+      :key="value.id"
+      class="text-xl bg-blue-700 px-5 py-4 rounded-xl flex justify-between items-center cursor-pointer"
       @click="clickRow(index, $event)"
     >
       <Checkbox
