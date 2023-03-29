@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const router = express.Router();
 
-let listArr = ['dato'];
+let listArr = ['dato', 'mari'];
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
