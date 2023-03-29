@@ -37,7 +37,7 @@ const clickRow = (index) => {
 const del = (id, index, e) => {
   e.stopPropagation()
   e.preventDefault()
-  fetch(`http://localhost:3000/api/delete/${id}`, {
+  fetch(`https://my-todo-api.netlify.app/.netlify/functions/api/delete/${id}`, {
     method: 'delete'
   })
     .then(res => res.json())

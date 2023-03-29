@@ -25,7 +25,7 @@ const { isMobile } = useIsMobile();
 const emits = defineEmits(["enterClicked"]);
 const value = ref("");
 
-const link = 'http://localhost:3000/api'
+const link = 'https://my-todo-api.netlify.app/.netlify/functions/api'
 
 const clicked = () => {
   fetch(`${link}/list/add`, {
