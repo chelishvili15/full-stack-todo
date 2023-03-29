@@ -4,13 +4,12 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const router = express.Router();
-const port = 3000;
 
 let listArr = ['dato'];
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
-// app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors());
 
 router.get("/list", (req, res) => {
   res.json(listArr);
@@ -30,8 +29,5 @@ router.delete("/delete/:id", (req, res) => {
 })
 
 app.use('/.netlify/functions/api', router)
-// app.listen(port, () => {
-//   console.log(port);
-// });
 
 module.exports.handler = serverless(app)

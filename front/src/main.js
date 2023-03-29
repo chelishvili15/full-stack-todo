@@ -5,7 +5,7 @@ import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 
 const app = createApp(App)
 
-app.provide('BASE_URL', 'http://localhost:3000/api')
+app.provide('BASE_URL', 'https://my-todo-api.netlify.app/.netlify/functions/api')
 app.use(autoAnimatePlugin)
 
 app.mount('#app')
